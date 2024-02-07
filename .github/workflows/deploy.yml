@@ -26,10 +26,6 @@ jobs:
           key: npm-deps-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm ci
-      - name: Run debug
-        run: |
-          echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
-          echo "MONGODB_USERNAME: $MONGODB_USERNAME"
       - name: Run server
         run: npm start & npx wait-on http://127.0.0.1:$PORT
       - name: Run tests
@@ -37,7 +33,7 @@ jobs:
       - name: Output information
         run: |
           echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
-          echo "MONGODB_NAME: $MONGODB_DB_NAME"
+          echo "MONGODB_PASSWD: ${{ env.MONGODB_PASSWORD }}"
   deploy:
     needs: test
     runs-on: ubuntu-latest
